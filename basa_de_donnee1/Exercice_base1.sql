@@ -1,24 +1,67 @@
+DROP DATABASE IF EXISTS beltexco;
+CREATE DATABASE beltexco;
+
+USE  beltexco;
 -- Création de la table "Clients"
 
-
+CREATE TABLE Clients (
+ClientsID INT PRIMARY KEY ,
+NOM VARCHAR (255),
+Prenom VARCHAR (255),
+Adresse VARCHAR (255),
+Email VARCHAR (255),
+NumeroTelephone VARCHAR (255)
+);
 
 
 
 -- Création de la table Fournisseurs
 
-
+CREATE TABLE Fournisseurs (
+FournisseurID INT PRIMARY KEY ,
+NomFournisseur VARCHAR (255),
+Adresse VARCHAR (255),
+Email VARCHAR (255),
+NumeroTelephone VARCHAR (255)
+);
 
 
 -- Création de la table employe
-
+CREATE TABLE Employe (
+EmployeID INT PRIMARY KEY ,
+NOM VARCHAR (255),
+Prenom VARCHAR (255),
+Fonction VARCHAR (255),
+Email VARCHAR (255),
+NumeroTelephone VARCHAR (255)
+);
     
  
  -- Création de la table "Produits"
+CREATE TABLE Produits (
+ProduitID INT PRIMARY KEY ,
+NomProduit VARCHAR (255),
+DescProduit VARCHAR (255),
+PrixUnitaire DECIMAL (10 , 2),
+FournisserID INT,
+foreign key (FournisserID) references Fournisseurs (FournisseurID)
+
+);
 
 
-
- --création de la table vente 
-
+ -- création de la table vente 
+CREATE TABLE Ventes (
+VenteID INT PRIMARY KEY ,
+Datevente DATE,
+ClientsID INT,
+ProduitID INT,
+EmployeID INT,
+FOREIGN KEY (ClientsID) REFERENCES Clients (ClientsID),
+FOREIGN KEY (ProduitID) REFERENCES Produits (ProduitID),
+FOREIGN KEY (EmployeID) REFERENCES Employe (EmployeID),
+Quantitévendue INT,
+MontantTotal DECIMAL (10 , 2)
+);
 
 
 -- Lire des informations dans la base
